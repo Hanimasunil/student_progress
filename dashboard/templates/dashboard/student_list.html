@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+</head>
+<body>
+    <h1>Student List</h1>
+
+
+    <a href="{% url 'add_student' %}">Add Student</a>
+
+<form method="GET" style="margin-top:10px; margin-bottom:10px;">
+    <input type="text" name="search" placeholder="Search by name or roll number" value="{{ search_query }}">
+    <button type="submit">Search</button>
+
+
+    <label for="exam">Filter by Exam:</label>
+    <select name="exam" id="exam" onchange="this.form.submit()">
+        <option value="">All Exams</option>
+        <option value="Quarterly" {% if exam_filter == 'Quarterly' %}selected{% endif %}>Quarterly</option>
+        <option value="Midterm" {% if exam_filter == 'Midterm' %}selected{% endif %}>Midterm</option>
+        <option value="Model" {% if exam_filter == 'Model' %}selected{% endif %}>Model</option>
+        <option value="End-Term" {% if exam_filter == 'End-Term' %}selected{% endif %}>End-Term</option>
+    </select>
+</form>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>Full Name</th>
+        <th>Roll Number</th>
+        <th>Class</th>
+        <th>Email</th>
+        <th>Date of Birth</th>
+        <th>Total Marks</th>
+        <th>Average Marks</th>
+        <th>Actions</th>
+    </tr>
+    {% for item in page_obj %}
+    <tr>
+        <td>{{ item.student.full_name }}</td>
+        <td>{{ item.student.roll_number }}</td>
+        <td>{{ item.student.student_class }}</td>
+        <td>{{ item.student.email }}</td>
+        <td>{{ item.student.date_of_birth }}</td>
+        <td>{{ item.total }}</td>
+        <td>{{ item.average }}</td>
+        <td>
+            <a href="{% url 'update_student' item.student.pk %}">Edit</a> |
+            <a href="{% url 'delete_student' item.student.pk %}">Delete</a> |
+            <a href="{% url 'add_progress' item.student.id %}">Add Progress</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div style="margin-top:10px;">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% if exam_filter %}&exam={{ exam_filter }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Previous</a>
+    {% endif %}
+
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if exam_filter %}&exam={{ exam_filter }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Next</a>
+    {% endif %}
+</div>
+
+</body>
+</html>
