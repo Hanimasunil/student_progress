@@ -26,24 +26,6 @@ This project is designed as an academic mini project / internship task using Dja
 
 ---
 
-## Project Structure
-
-student_progress/
-│
-├── student_progress/ # Project settings
-├── app/ # Main application
-│ ├── models.py
-│ ├── views.py
-│ ├── forms.py
-│ ├── urls.py
-│ └── templates/
-│
-├── manage.py
-└── README.md
-
-
----
-
 ## Installation & Setup
 
 
