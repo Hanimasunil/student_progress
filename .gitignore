@@ -1,0 +1,33 @@
+# Python compiled files
+_pycache_/
+*.py[cod]
+*$py.class
+
+# Byte-compiled
+*.pyo
+*.pyd
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# PyCharm / IDE
+.idea/
+*.iml
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
